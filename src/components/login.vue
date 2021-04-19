@@ -18,43 +18,63 @@
                 <el-row>
                     <el-col :span="24"><el-button type="danger" plain @click="switchto">还未注册？点击注册</el-button></el-col>
                 </el-row>
+                <el-row>
+                  <el-col :span="12" :offset="0"><el-button type="text" plain @click="justExplore">仅浏览商品</el-button></el-col>
+                  <el-col :span="12" :offset="0"><el-button type="text" plain @click="forgetpw">重置密码</el-button></el-col>
+                </el-row>
         </div>
+        <resetpw v-show="showsetpw"></resetpw>
     </div>
 </template>
 
 <script>
+import resetpw from './resetpw'
+import { checkpw } from "../assets/js/fns";
 export default {
     data() {
         return {
             logininfo:{
                 username:'test',
-                password:'123456Cc*'
-            }
+                password:'123456Cc*',
+            },
+            showsetpw: true
         }
+    },
+    components:{
+        resetpw
     },
     methods:{
         login:function() {
             let that=this;
-            this.$http.post('login',that.logininfo,{
+            if (/^\w+$/.test(that.logininfo.username)&&checkpw(that.logininfo.password)) {
+                this.$http.post('user/login',that.logininfo,{
                              "content-type":"application/json"
                          }
                      ).then(function(res){
-                         console.log(res);
-                        if(res.state=="1") {
-                           that.$message.success("登录失败"); 
-                            window.sessionStorage.setItem('token',JSON.stringify(data.token));
+                        if(res.data.code=="1") {
+                           that.$message.success("登录成功"); 
+                            window.sessionStorage.setItem('token',JSON.stringify(res.data.token));
                             window.sessionStorage.setItem('userinfo',JSON.stringify(that.logininfo.username));
                             that.$router.replace({ path:'/shop' })
                         } else {
-                            that.$message.error("登录失败");
+                            that.$message.error(res.data.msg);
                         }
                      },(e)=>{
                          that.$message.error("登录失败");
                      }); 
+            } else {
+                this.$message.error('账号或密码格式错误！')
+            }
         },
         switchto:function() {
             let that = this;
             that.$router.push({ path:'/register' })
+        },
+        justExplore:function() {
+            this.$router.push({path:'/shop'})
+        },
+        forgetpw:function() {
+            this.showsetpw = true;
         }
     }
 }
@@ -87,5 +107,20 @@ export default {
 }
 img {
     height: 50px;
+}
+.el-button.is-active, .el-button.is-plain:active {
+    color: rgb(250, 186, 184);
+    border-color: rgb(250, 186, 184);
+}
+.el-button--text {
+    color: rgb(238, 95, 90);
+    background: 0 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+.el-button.is-plain:focus, .el-button.is-plain:hover {
+    background: #FFF;
+    border-color: rgb(250, 186, 184);
+    color: rgb(241, 108, 103);
 }
 </style>

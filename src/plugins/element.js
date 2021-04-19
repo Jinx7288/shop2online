@@ -14,7 +14,9 @@ import {Button
         ,Header
         ,Main
         ,Card
-        ,Avatar } from 'element-ui'
+        ,Avatar
+        ,Aside
+        ,Badge } from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Row)
@@ -31,6 +33,7 @@ Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Avatar)
 Vue.use(Card)
-
+Vue.use(Aside)
+Vue.use(Badge)
 Vue.prototype.$message = Message
 

@@ -5,7 +5,8 @@ import router from './router/index'
 import './plugins/element.js'
 import './assets/css/global.css'
 import axios from 'axios'
-axios.defaults.withCredentials=true;
+
+// axios.defaults.withCredentials=true;
 axios.defaults.baseURL='http://z3773e6368.qicp.vip/'
 axios.interceptors.request.use(function (config) {
   let token = window.localStorage.getItem('token')

@@ -3,14 +3,34 @@ import VueRouter from 'vue-router'
 import register from '../components/register'
 import login from '../components/login'
 import shop from '../views/shop'
+import detail from '../views/detail'
+import showpanel from '../views/showpanel'
+import upload from '../views/upload'
 Vue.use(VueRouter)
 
 const routes = [
     { path:'/',redirect:'/login'},
     { path: '/register', component: register },
     { path: '/login', component: login },
-    { path: '/shop',component:shop}
-  ]
+    { path: '/shop',
+    component:shop,
+    children:[
+        {
+            path:"",redirect:"/showpanel"
+        },
+        {
+            path:"/showpanel",component:showpanel
+        },
+        {
+            path:"/detail",component:detail
+        },
+        
+        {
+            path:'/upload',component:upload
+        }
+    ]
+    }
+]
 
 const router = new VueRouter({
     routes
