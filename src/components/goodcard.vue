@@ -30,12 +30,12 @@ export default {
     },
     methods:{
         gotodetail:function() {
-            // if (window.sessionStorage.getItem('userinfo')) {
-            //     this.$router.push({path:'/detail',query: { goodid:this.goodid}})
-            // } else {
-            //     this.$emit('togglelogin')
-            // }
-            this.$router.push({path:'/detail',query: { goodid:this.item.goodsId}})
+            if (window.sessionStorage.getItem('userinfo')) {
+                this.$router.push({path:'/detail',query: { goodid:this.goodid}})
+            } else {
+                this.$emit('togglelogin')
+            }
+            // this.$router.push({path:'/detail',query: { goodid:this.item.goodsId}})
         },
         getSample:function() {
             let that = this

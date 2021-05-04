@@ -74,7 +74,7 @@ export default {
                 buyer:"",
             },
             ads:[],
-            justshow:true
+            justshow:false
         }
     },
     // computed:{

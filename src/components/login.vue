@@ -187,7 +187,7 @@ export default {
                 );
                 window.sessionStorage.setItem(
                   "userinfo",
-                  JSON.stringify(that.logininfo.username)
+                  JSON.stringify(that.logininfo)
                 );
                 that.$store.commit("getuserinfo", that.logininfo);
                 that.$router.replace({ path: "/shop" });

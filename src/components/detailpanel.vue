@@ -23,12 +23,11 @@ export default {
     },
     props:{
         detail: {
-            type: Array,
-            default:() => []   
+            type: Object,
+            default:() => {}   
         },
         justshow:{
-            type:Boolean,
-            default:() => false
+            type:Boolean
         }
     }
 }

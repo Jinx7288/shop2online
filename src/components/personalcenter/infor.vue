@@ -1,12 +1,18 @@
 <template>
   <div class="back">
+    <el-header>
     <el-button type="danger">删除选中</el-button>
-           <goodcard v-for="(item,index) in goods"
-                    :key="item.goodid"
-                    :item='item'
-                    :index='index'
-                    class="goodcard"
-                   ></goodcard>
+    </el-header>
+    <el-main>
+        <goodcard v-for="(item,index) in goods"
+            :key="item.goodid"
+            :item='item'
+            :index='index'
+            class="goodcard">
+            <div @click="togglefloat(item)">
+            </div>
+            </goodcard>
+    </el-main>
   </div>
 </template>
 
@@ -49,12 +55,21 @@ export default {
   props:{
 
   },
+  methods:{
+    togglefloat:function(item) {
+      
+    }
+
+  },
   components:{
     goodcard
   }
 }
 </script>
 <style scoped>
+.el-button {
+  margin: 10px;
+}
 .back {
     width: 70%;
     margin: 0px auto;
