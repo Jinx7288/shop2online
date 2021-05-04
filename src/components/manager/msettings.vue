@@ -1,7 +1,6 @@
 <template>
   <div>
-    <p>我是子组件</p>
-    <i class="zi zi_glass"></i>
+    <p>msettings</p>
   </div>
 </template>
 

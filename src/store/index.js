@@ -5,11 +5,15 @@ Vue.use(Vuex)
 
 const store =new Vuex.Store({
     state:{
-        goods:[1,2,3,4,5]
+        goods:[],
+        userinfo:{}
     },
     mutations:{
         shareGoods:function(state,li) {
             state.goods=li
+        },
+        getuserinfo:function(state,info) {
+            state.userinfo=info
         }
     },
     getters:{

@@ -1,12 +1,13 @@
 <template>
-    <div class="forborder">
-        <el-card :body-style="{ padding: '0px' }">
-            <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+    <div>
+        <el-card>
+            <el-image :src="base+toString(item.goodsId)" class="image" fit="fill"></el-image>
             <div style="padding: 14px;">
-                <span>{{ }}</span>
+                <span class="title">{{ item.msg }}</span>
+                <span class="price">{{ item.price }}</span>
                 <div class="bottom clearfix">
-                
-                <time class="time">{{  }}</time>
+                <span class="el-icon-user user">{{ item.seller }}</span><br>
+                <time class="time el-icon-time">{{ item.date  }}</time><br>
                 <el-button type="danger" class="button" size="small" @click="gotodetail">详情</el-button>
                 </div>
             </div>
@@ -18,12 +19,23 @@ export default {
     name:'goodcard',
     data:function() {
         return {
-            goodid:''
+            base:"http://120.78.128.98:8080/index/getGoodsMainPicture?goodsId="
+            
         }
+    },
+    created:function() {
+        // console.log(this.item)
+    },
+    computed:{
     },
     methods:{
         gotodetail:function() {
-            this.$router.push({path:'/detail',query: { goodid:this.goodid}})
+            // if (window.sessionStorage.getItem('userinfo')) {
+            //     this.$router.push({path:'/detail',query: { goodid:this.goodid}})
+            // } else {
+            //     this.$emit('togglelogin')
+            // }
+            this.$router.push({path:'/detail',query: { goodid:this.item.goodsId}})
         },
         getSample:function() {
             let that = this
@@ -32,7 +44,7 @@ export default {
     },
     props:{
         item: {
-            type: Array,                 //可指定接收类型，如:Array.
+            type: Object,                 //可指定接收类型，如:Array.
             default:() => []   //可设置默认值
         },
         index:{
@@ -42,13 +54,30 @@ export default {
 }
 </script>
 <style scoped>
-.forborder {
-    padding: 10px;
-    border: 2px rgb(243, 144, 144) solid;
-    border-radius: 7px;
-    width: 14%;
+.button {
+    margin: 5px auto;
 }
-img {
-    width: 100%;
+.el-image {
+    height:200px;
+    width: 250px;
+}
+.el-card  /deep/ .el-card__body {
+    padding: 0px;
+}
+.title {
+    font-size: 15px;
+    color: rgb(243, 109, 92);
+}
+.price {
+    font-weight: 600;
+    margin-left: 20px;
+}
+.user {
+    font-size: 10px;
+    color: rgb(31, 30, 30);
+}
+.time {
+    font-size: 11px;
+    color: rgb(160, 159, 159);
 }
 </style>

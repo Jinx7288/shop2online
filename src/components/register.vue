@@ -24,6 +24,15 @@
                     <el-col :span="24"><el-input v-model="newpw2" type="password" placeholder="请确认您的密码" maxlength="20" minlength="8"></el-input></el-col>
                 </el-row>
                 <el-row>
+                    <el-col :span="16">
+                        <el-input v-model="newuser.code" type="text" placeholder="邮箱验证码">
+                        </el-input>
+                    </el-col>
+                    <el-col :span="8">
+                                <el-button type="text" plain @click="sendauthcode">发送验证码</el-button>
+                    </el-col>
+                </el-row>
+                <el-row>
                     <el-col :span="24"><el-button type="danger" @click="register">注册</el-button></el-col>
                 </el-row>
                 <el-row>
@@ -36,12 +45,13 @@
 export default {
     data() {
         return {
+            getcode:false,
             newuser:{
-                newname:'tfr',
+                username:'demoforsign',
                 password:'123456Aa*',
-                email:'777777@qq.com',
-                phone:'',
-                status:0
+                email:'2117000274@qq.com',
+                phone:'15333333333',
+                code:""
             },
             newpw2:'123456Aa*',
         }
@@ -49,13 +59,24 @@ export default {
     computed:{
         userinfo:function() {
             let that =this
-            return that.newuser.newname
+            return that.newuser.username
         }
     },
     methods:{
+        sendauthcode:function() {
+            let that = this;
+            this.$http.post('/auth/sendEmailCode',{
+                email:that.newuser.email
+            }).then(function(res) {
+                console.log(res)
+                if(res.status==200) {
+                    that.$message.success("发送成功，请注意查收")
+                }
+            })
+        },
         register:function() {
             let that = this;
-            this.$http.post('user/register',that.newuser,{
+            this.$http.post('/auth/register',that.newuser,{
                              "content-type":"application/json"
                          }
                      ).then(function(res){
@@ -67,6 +88,7 @@ export default {
                             that.$router.push({ path:'/shop' })
                         } else {
                             that.$message.error(res.data.msg);
+                            console.log(res)
                         }
                      },(e)=>{
                          that.$message.error("注册失败");
@@ -80,19 +102,22 @@ export default {
 </script>
 <style scoped>
 .warp_for_register {
-    background-color: rgb(250, 186, 184);
+    background-color: rgb(254, 254, 254);
     padding: 5px;
     height: 100%
 }
 .box {
     margin: 20vh auto;
     padding: 20px;
-    border:none;
-    border-radius: 10px;
-    background-color: rgba(253, 253, 253, 0.616);
+    border:0.5px solid rgba(240, 240, 240);
+    border-radius: 5px;
+    background-color: rgba(247, 247, 247, 0.616);
     width: 400px;
     line-height: 10px;
     font-size: large;
+}
+.box:hover {
+    box-shadow: 0px 2px 5px 0.5px gray;
 }
 .el-row {
     margin-bottom: 25px;
