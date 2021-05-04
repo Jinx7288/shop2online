@@ -255,6 +255,7 @@
       },
 
       addto(item) {
+        let that = this
         if (this.dynamicTags.length>=7) {
                this.$message({
                 message: '最多只能添加七个标签哦',
@@ -262,6 +263,7 @@
             });
         } else {
               this.dynamicTags.push(item)
+              this.$emit("givelbs",that.dynamicTags)
         }
       }
     }

@@ -45,9 +45,8 @@
           ></el-input
         ></el-col>
         <el-col :span="9">
-          <!-- <el-image src="http://120.78.128.98:8080/auth/getCode" fit="contain"></el-image> -->
-          <img src="http://120.78.128.98:8080/auth/getCode/?username=demoforsign" class="imgs" />
-          <!-- <img src="http://z3773e6368.qicp.vip/auth/getCode" class="imgs"> -->
+          <img src="http://120.78.128.98:8080/auth/getCode/?username=demoforsign" class="imgs">
+          <!-- <img src="http://z3773e6368.qicp.vip/auth/getCode/?username=demoforsign" class="imgs"> -->
         </el-col>
       </el-row>
       <el-row>
@@ -181,9 +180,10 @@ export default {
             function (res) {
               if (res.status == 200) {
                 that.$message.success("登录成功");
+                console.log(res)
                 window.sessionStorage.setItem(
                   "token",
-                  JSON.stringify(res.data.token)
+                  JSON.stringify(res.data.data.token)
                 );
                 window.sessionStorage.setItem(
                   "userinfo",

@@ -30,7 +30,7 @@
             </div>
         </el-aside>
         <el-main>
-            <detailpanel :detail='gooddetail' @ordertoggle='ordertoggle' :justshow="justshow" @deletegood='deletegood'></detailpanel> 
+            <detailpanel :detail='gooddetail' @ordertoggle='ordertoggle' :justshow="justshow"></detailpanel> 
             <el-dialog title="下单"   :visible.sync="ordertogglestate">
                  <el-form :model="orderform"  ref="orderform" label-width="100px">
                     <el-form-item label="姓名" prop="title">

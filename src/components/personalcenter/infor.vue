@@ -39,7 +39,10 @@ export default {
   },
   mounted:function() {
      let that=this;
-            this.$http.get('/users/getUserGoods?username='+that.userinfo.username
+            this.$http.get('/users/getUserGoods', { headers: {
+           'content-type': 'application/json',
+           "token":window.sessionStorage.getItem("token")
+        }}
                      ).then(function(res){
                         console.log(res);
                         if(res.data.code=="1") {

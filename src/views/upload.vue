@@ -9,7 +9,7 @@
                         ref="upload"
                         :with-credentials="true"
                         :auto-upload='false'
-                        :file-list="uplist"
+                        :file-list="upfilelist"
                         :limit="5"
                         accept="iamge/jpeg,image/png,image/jpg"
                         :on-exceed="handleexceed"
@@ -28,7 +28,7 @@
                         <el-input v-model="upForm.title" style="width: 60%"></el-input>
                     </el-form-item>
                     <el-form-item label="期望价格">
-                        <el-input-number v-model="upForm.price" :precision="2" :step="0.1" :max="10000" :min="0" :controls="notctrl"></el-input-number>
+                           <el-input-number v-model="upForm.price" :precision="2" :step="0.1" :max="10000" :min="0" :controls="notctrl"></el-input-number>
                     </el-form-item>
                     <el-form-item label="标签">
                         <tags @givelbs="givelbs"></tags>
@@ -56,10 +56,11 @@ export default {
     data:function() {
         return {
             notctrl:false,
+              title:"",
             upForm: {
-                title:"",
                 goodsId:"0",
                 labelIds:[],
+                level:"0",
                 price:"",
                 msg:"",
             },
@@ -75,7 +76,7 @@ export default {
                 { required: true, message: '请选择标签', trigger: 'change' }
             ]
             },
-            uplist:[]
+            upfilelist:[]
         }
     },
     computed: {
@@ -85,24 +86,26 @@ export default {
     },
     methods:{
         givelbs:function(items) {
-            this.upForm.labelIds = items;
+            for( item in items) {
+            this.upForm.labelIds.push(item.id)
+            }
         },
         reset:function() {
-            this.upForm = {
-                title:"",
-                tag:"",
+            this.title="";
+            this.upForm =   {
+                goodsId:"0",
+                labelIds:[],
                 price:"",
-                detail:"",
-                address:""
+                msg:"",
             }
         },
         handleexceed:function() {
             this.$message.error("只能上传五张哦")
-            this.uplist.slice(4);
+            this.upfilelist.slice(4);
         },
-        handlechange:function(file,uplist) {
-            this.uplist.push(file)
-            console.log(this.uplist)
+        handlechange:function(file,upfilelist) {
+            this.upfilelist.push(file)
+            console.log(this.upfilelist)
         },
         handleRemove(file, fileList) {
             this.upist = fileList
@@ -110,29 +113,58 @@ export default {
         uploadtoserver:function() {
             // this.$refs.upload.submit();
             let that = this;
+            let token  = JSON.parse(window.sessionStorage.getItem("token"));
+            console.log(that.upForm)
             this.$http
-                .post("/user/createGoods", that.upForm)
+                .post("/user/createGoods", that.upForm, 
+                { headers: {
+                    'content-type': 'application/json',
+                    "token":token
+                }})
                 .then(function (res) {
-                console.log(res);
+                // console.log(res);
                 if (res.status == 200) {
-                    that.$message.success(res.data.msg);
-                }
-                });
-
-                let formdata= new FormData;
-                formdata.append("goodsId",that.fid);
-                formdata.append("tag","1");
-                formdata.append("file",that.upfilelist[0].raw);
-                for(1;5;1) {
-                    let formdata= new FormData;
-                    formdata.append("goodsId",that.fid);
-                    formdata.append("tag","0");
-                    formdata.append("file",that.upfilelist[i].raw);
-                }
+                        that.$message.success(res.data.msg);
+                        let fformdata= new FormData;
+                        fformdata.append("goodsId","1");
+                        fformdata.append("tag","1");
+                        fformdata.append("file",that.upfilelist[0].raw);
+                        this.$http
+                        .post("/user/uploadGoodsPicture",fformdata, 
+                        { headers: {
+                            'content-type': 'application/x-www-form-urlencoded',
+                            "token":token
+                        }})
+                        .then(function (res) {
+                        console.log(res);
+                        if (res.status == 200) {
+                            that.$message.success(res.data.msg);
+                        }
+                        });
+                        for(let i = 1;i<=that.upfilelist.length-1;i++) {
+                            let formdata= new FormData;
+                            formdata.append("goodsId",res.data.goodsId);
+                            formdata.append("tag","0");
+                            formdata.append("file",that.upfilelist[i].raw);
+                            this.$http
+                                .post("/user/uploadGoodsPicture",formdata, 
+                                { headers: {
+                                    'content-type': 'application/x-www-form-urlencoded',
+                                    "token":token
+                                }})
+                                .then(function (res) {
+                                console.log(res);
+                                if (res.status == 200) {
+                                    // that.$message.success(res.data.msg);
+                                }
+                                });
+                                }
+                        }
+                        });
         },
-        rendertags:function() {
-            this.upForm.tags=this.$refs['tags'].getVal();
-        }
+        // rendertags:function() {
+        //     this.upForm.tags=this.$refs['tags'].getVal();
+        // }
     },
     components:{
         tags
