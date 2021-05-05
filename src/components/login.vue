@@ -45,7 +45,8 @@
           ></el-input
         ></el-col>
         <el-col :span="9">
-          <img src="http://120.78.128.98:8080/auth/getCode/?username=demoforsign" class="imgs">
+          <el-button type="danger" @click="toggleshow" v-show="getname">获取验证码</el-button>
+          <img :src="imgurl" class="imgs" v-show="!getname">
           <!-- <img src="http://z3773e6368.qicp.vip/auth/getCode/?username=demoforsign" class="imgs"> -->
         </el-col>
       </el-row>
@@ -136,6 +137,8 @@ import { checkpw } from "../assets/js/fns";
 export default {
   data() {
     return {
+      getname:true,
+      imgurl:"http://120.78.128.98:8080/auth/getCode?username=",
       logininfo: {
         code: "",
         username: "demoforsign",
@@ -152,6 +155,10 @@ export default {
   },
   components: {},
   methods: {
+    toggleshow:function() {
+      this.getname = false
+      this.imgurl= this.imgurl + this.logininfo.username
+    },
     sendauthcode: function () {
       let that = this;
       this.$http
@@ -178,7 +185,7 @@ export default {
           })
           .then(
             function (res) {
-              if (res.status == 200) {
+              if (res.data.code == '1') {
                 that.$message.success("登录成功");
                 console.log(res)
                 window.sessionStorage.setItem(
@@ -192,7 +199,7 @@ export default {
                 that.$store.commit("getuserinfo", that.logininfo);
                 that.$router.replace({ path: "/shop" });
               } else {
-                // that.$message.error(res.data.msg);
+                that.$message.error(res.data.msg);
               }
             },
             (e) => {
@@ -235,8 +242,8 @@ export default {
           )
           .then(
             function (res) {
-              if (res.status == "1") {
-                that.$message.success("验证码发送成功，请查看邮箱");
+              if (res.status == 200) {
+                that.$message.success("修改成功");
                 setInterval(function () {
                   that.resetpw =  {
                         username: "",
