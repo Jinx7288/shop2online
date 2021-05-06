@@ -17,7 +17,7 @@ import settings from '../components/personalcenter/settings'
 import goodscheck from "../components/manager/goodscheck"
 import msettings from "../components/manager/msettings"
 import usermanage from "../components/manager/usermanage"
-
+import personalgooddetail from "../components/personalcenter/personalgooddetail"
 Vue.use(VueRouter)
 
 const routes = [
@@ -76,9 +76,11 @@ const routes = [
         },
         {
             path:"/settings",component:settings
+        },
+        {
+            path:"/personalgooddetail",component:personalgooddetail
         }
     ]},
-
 ]
 
 const router = new VueRouter({

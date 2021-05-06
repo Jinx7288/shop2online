@@ -18,7 +18,7 @@
                                 </span>
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item>admin</el-dropdown-item>
-                                    <el-dropdown-item divided @click="unregister">注销</el-dropdown-item>
+                                    <el-dropdown-item divided @click.native="unregister">注销</el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>        
                         </el-col>

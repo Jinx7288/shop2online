@@ -14,7 +14,7 @@
                         </el-card>
                     </el-col>
                     <el-col :span="12">
-                        <el-card class="box-card" shadow="hover">
+                        <el-card class="box-card" shadow="hover" @click="gotosignup">
                             <div class="zi zi_userplus icon_size3 zi_inverse">
                             </div>
                             <div>没有,现在注册</div>
@@ -129,6 +129,9 @@ export default {
         },
         gotologin:function() {
             this.$router.push({ path:"/login"})
+        },
+        gotosignup:function() {
+            this.$router.push({ path:"/register"})
         }
     },
 }

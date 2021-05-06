@@ -70,7 +70,7 @@ export default {
             }).then(function(res) {
                 console.log(res)
                 if(res.status==200) {
-                    that.$message.success("发送成功，请注意查收")
+                    that.$message.success(res.data.msg)
                 }
             })
         },

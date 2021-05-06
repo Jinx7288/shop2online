@@ -62,56 +62,6 @@
         inputValue: '',
         lbli:[
     {
-        id: 1,
-        fid: 0,
-        name: "女装"
-    },
-    {
-        id: 2,
-        fid: 0,
-        name: "男装"
-    },
-    {
-        id: 3,
-        fid: 0,
-        name: "户外运动"
-    },
-    {
-        id: 4,
-        fid: 0,
-        name: "手机数码"
-    },
-    {
-        id: 5,
-        fid: 0,
-        name: "宿舍用品"
-    },
-    {
-        id: 6,
-        fid: 0,
-        name: "箱包"
-    },
-    {
-        id: 7,
-        fid: 0,
-        name: "化妆品"
-    },
-    {
-        id: 8,
-        fid: 0,
-        name: "配饰"
-    },
-    {
-        id: 9,
-        fid: 0,
-        name: "鞋帽"
-    },
-    {
-        id: 10,
-        fid: 0,
-        name: "食品"
-    },
-    {
         id: 15,
         fid: 2,
         name: "男上装"

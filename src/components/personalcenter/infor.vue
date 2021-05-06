@@ -4,20 +4,20 @@
     <el-button type="danger">删除选中</el-button>
     </el-header>
     <el-main>
-        <goodcard v-for="(item,index) in goods"
+        <goodcardper v-for="(item,index) in goods"
             :key="item.goodid"
             :item='item'
             :index='index'
             class="goodcard">
             <div @click="togglefloat(item)">
             </div>
-            </goodcard>
+            </goodcardper>
     </el-main>
   </div>
 </template>
 
 <script>
-import goodcard from "../goodcard"
+import goodcardper from "../personalcenter/goodcardper"
 export default {
   data:function() {
     return {
@@ -65,7 +65,7 @@ export default {
 
   },
   components:{
-    goodcard
+    goodcardper
   }
 }
 </script>

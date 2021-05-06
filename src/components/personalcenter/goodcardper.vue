@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-card>
-            <el-image :src="imgurl" class="image" fit="fill"></el-image>
+            <el-image :src="base+toString(item.goodsId)" class="image" fit="fill"></el-image>
             <div style="padding: 14px;">
                 <span class="title">{{ item.msg }}</span>
                 <span class="price">{{ item.price }}</span>
@@ -16,7 +16,7 @@
 </template>
 <script>
 export default {
-    name:'goodcard',
+    name:'goodcardper',
     data:function() {
         return {
             base:"http://120.78.128.98:8080/index/getGoodsMainPicture?goodsId="
@@ -27,14 +27,11 @@ export default {
         // console.log(this.item)
     },
     computed:{
-        imgurl:function() {
-            return this.base + this.item.id
-        }
     },
     methods:{
         gotodetail:function() {
             if (window.sessionStorage.getItem('userinfo')) {
-                this.$router.push({path:'/detail',query: { goodid:this.goodid}})
+                this.$router.push({path:'/personalgooddetail',query: { goodid:this.goodid}})
             } else {
                 this.$emit('togglelogin')
             }

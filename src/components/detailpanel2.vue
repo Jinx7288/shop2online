@@ -5,8 +5,6 @@
         <div class="detaileddetail">描述：</div><br>
         <span class="address">联系方式：</span>
         <div class="btdiv" v-show="!justshow">
-                <el-button type="danger" class="wideer" @click="buyit">购买</el-button>
-                <el-button type="danger" plain class="wideer" disabled>收藏</el-button>
         </div>
     </div>
 </template>

@@ -11,6 +11,30 @@
                     :index='index'>
         </sentense>
         </el-dialog>
+          <el-dialog
+                center
+                title="您还未登录"
+                :visible.sync="showlogin"
+                width="30%">
+                <el-row>
+                    <el-col :span="12">
+                        <el-card class="box-card" shadow="hover" @click="gotologin">
+                            <div class="zi zi_usercheck icon_size3 zi_inverse"></div>
+                            <div>我有账户，登录</div>
+                        </el-card>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-card class="box-card" shadow="hover" @click="gotosignup">
+                            <div class="zi zi_userplus icon_size3 zi_inverse">
+                            </div>
+                            <div>没有,现在注册</div>
+                        </el-card>
+                    </el-col>
+                </el-row>                
+                <span slot="footer" class="dialog-footer">
+                    <el-button @click="togglelogin">随便看看</el-button>
+                </span>
+            </el-dialog>
        <el-container>
             <el-header>
                     <el-row  align="middle">
@@ -35,7 +59,7 @@
                                 </span>
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item @click.native="gotopc">{{ userinfo.username }}</el-dropdown-item>
-                                    <el-dropdown-item divided @click="unregister">注销</el-dropdown-item>
+                                    <el-dropdown-item divided @click.native="unregister">注销</el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>        
                         </el-col>
@@ -59,7 +83,8 @@ export default {
                     ,"您的商品上传成功，将被放在首页供选购，您将会收到通知"
                     ,"您的违规商品过多，若再次发布将被封禁账号，特此警告"
                     ],
-            showbox:false
+            showbox:false,
+            showlogin:false
         }
     },
     created() {
@@ -100,13 +125,27 @@ export default {
         unregister:function() {
             window.sessionStorage.removeItem('userinfo')
             window.sessionStorage.removeItem('token')
-            this.$router.push({path:'/login'})
+            this.$router.push({path:'../login'})
         },
         gotopc:function() {
-            this.$router.replace({ path:"/personalcenter"})
+            if (window.sessionStorage.getItem('token')) {
+                this.$router.replace({ path:"/personalcenter"})
+            } else {
+                this.togglelogin();
+            }
         },
         openinbox:function() {
 
+        },
+            togglelogin:function() {
+        this.showlogin= this.showlogin == true ? false : true
+        },
+        gotologin:function() {
+            console.log(1)
+            this.$router.push({ path:"../login"})
+        },
+        gotosignup:function() {
+            this.$router.push({ path:"../register"})
         }
     },
     components: { 
@@ -116,6 +155,7 @@ export default {
 }
 </script>
 <style>
+
 .el-dialog {
     height: 80%;
     overflow: scroll;
@@ -123,6 +163,19 @@ export default {
 }
 </style>
 <style scoped>
+.box-card {
+    padding-left: 35px;
+    height: 189px;
+    background-color: rgb(255, 203, 203);
+    color: rgb(100, 100, 100);
+}
+.spantext {
+   font-size: 15px;
+   color: rgb(32, 30, 30);
+}
+.icon_size3 {
+    font-size: 5rem;
+}
 #app > div {
     padding: 0px;
     margin: 0px;

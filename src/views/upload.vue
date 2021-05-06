@@ -97,7 +97,8 @@ export default {
                 labelIds:[],
                 price:"",
                 msg:"",
-            }
+            },
+            this.upfilelist=[]
         },
         handleexceed:function() {
             this.$message.error("只能上传五张哦")
