@@ -18,6 +18,7 @@ import goodscheck from "../components/manager/goodscheck"
 import msettings from "../components/manager/msettings"
 import usermanage from "../components/manager/usermanage"
 import personalgooddetail from "../components/personalcenter/personalgooddetail"
+import statistic from "../components/manager/statistic"
 Vue.use(VueRouter)
 
 const routes = [
@@ -36,6 +37,9 @@ const routes = [
         },
         {
             path:"/usermanage",component:usermanage
+        },
+        {
+            path:"/statistic",component:statistic
         },
         {
             path:"/msettings",

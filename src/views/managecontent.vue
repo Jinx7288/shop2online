@@ -35,7 +35,7 @@
                         <i class="zi zi_usercog zi_size"></i>
                         <span slot="title">  用户管理</span>
                     </el-menu-item>
-                    <el-menu-item index="/statistic" disabled>
+                    <el-menu-item index="/statistic">
                         <i class="zi zi_curve zi_size"></i>
                         <span slot="title">  数据统计</span>
                     </el-menu-item>
