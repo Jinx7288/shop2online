@@ -42,7 +42,7 @@
                         <el-table-column prop="upuser" label="上传用户" width="200px"></el-table-column>
                         <el-table-column prop="tags" label="标签">
                               <template slot-scope="scope">
-                                  <el-tag type="danger" style="margin:3px"> {{ scope.row.tags }}</el-tag>
+                                  <el-tag type="danger" style="margin:3px"> {{ scope.row.tags | splitsth}}</el-tag>
                                   <!-- <el-tag type="danger" v-for="item in goodslist[].tags" :key="item" style="margin:3px">{{ item }}</el-tag> -->
                               </template>
                         </el-table-column>
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+// import { config } from 'vue/types/umd'
 export default {
   components: { },
   data:function() {
@@ -118,6 +119,15 @@ export default {
   },
   computed:{
   },
+  filters: {
+        splitsth: function (value) {
+        if (!value) return ''
+        value = value.toString()
+        value=value.replaceAll(","," ")
+        // console.log(value);
+        return value
+    }
+    }, 
   created:function() {
     this.bigurl = this.urllist[0]
   },
