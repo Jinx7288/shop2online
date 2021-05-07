@@ -1,24 +1,45 @@
-# shop2online
+# 与后端接口未对接完成
 
-## Project setup
-```
-npm install
-```
+# 用户界面
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+基本：
 
-### Compiles and minifies for production
-```
-npm run build
-```
++ 登录
++ 注册
++ 重置密码
++ 首页商品  
 
-### Lints and fixes files
-```
-npm run lint
-```
+登录可用：
++ 商品详情界面
++ 下单
++ 即时消息(未对接)
++ 上传商品
++ 个人中心
+    + 商品列表，详情
+    + 地址管理
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+管理员：<p style="color:red">基本未对接，展示默认数据</p>
+
++ 登录
++ 基本用户管理：获取信息，冻结解冻
++ 基本商品管理：通过，屏蔽
++ 基本数据统计：`Chart.js`简单图表
++ 设置 无
+
+## 依赖
+
+1. vue全家桶
+2. axios
+3. mock.js
+4. Chart.js
+5. zico
+
+## 想法
+
+1. Javascript<b>基础</b>太差了，得补了
+2. 整体规划很重要，并且规划要具体到接口，文档一定得写
+3. 写博客记录自己的问题，给自己看的，无所谓别人
+4. 要具有全栈能力
+5. 文档yyds
+6. 想要<b>产品经理</b>
+7. 不想答辩，学姐只看md就行了吧
