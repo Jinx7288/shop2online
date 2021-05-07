@@ -7,7 +7,7 @@
                 <span class="price">{{ item.price }}</span>
                 <div class="bottom clearfix">
                 <span class="el-icon-user user">{{ item.seller }}</span><br>
-                <time class="time el-icon-time">{{ item.date  }}</time><br>
+                <time class="time el-icon-time">{{ item.date | fixdate }}</time><br>
                 <el-button type="danger" class="button" size="small" @click="gotodetail">详情</el-button>
                 </div>
             </div>
@@ -52,6 +52,15 @@ export default {
         },
         index:{
             type: Number
+        }
+    },
+    filters: {
+        fixdate: function (value) {
+            if (!value) return ''
+            value = value.toString()
+            value = value.slice(0,16)
+            value = value.replace("T",)
+            return 
         }
     }
 }

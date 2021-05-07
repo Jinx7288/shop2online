@@ -6,7 +6,8 @@
         <span class="address">联系方式：</span>
         <div class="btdiv" v-show="!justshow">
                 <el-button type="danger" class="wideer" @click="buyit">购买</el-button>
-                <el-button type="danger" plain class="wideer" disabled>收藏</el-button>
+                <el-button type="danger" plain class="wideer" @click="report"  v-show="!reported">举报</el-button>
+                <el-button type="danger" plain class="wideer" v-show="reported" disabled>已举报</el-button>
         </div>
     </div>
 </template>
@@ -14,11 +15,26 @@
 export default {
     data:function() {
         return {
+            reported:false
         }
     },
     methods:{
         buyit:function() {
             this.$emit('ordertoggle')
+        },
+        report:function() {
+            this.reported=true;
+             this.$http
+            .post("/auth/user/report", {
+            email: that.resetpw.email,
+            username:that.resetpw.username
+            })
+            .then(function (res) {
+                console.log(res);
+                if (res.status == 200) {
+                     this.$message.warning("已举报，待工作人员审核")
+                }
+            });
         }
     },
     props:{
