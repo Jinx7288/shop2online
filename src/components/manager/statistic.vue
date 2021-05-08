@@ -6,9 +6,14 @@
             <el-button size="medium" @click="togu">日上传商品数</el-button>
         </div>
         <div class="daytimes">
-            <canvas ref="c1" v-show="show1"></canvas>
-            <canvas ref="c2" v-show="show2"></canvas>
-            <canvas ref="c3" v-show="show3"></canvas>
+            <transition name="slide-fade">
+                <canvas ref="c1" v-show="show1"></canvas>    
+            </transition>
+            <transition name="slide-fade">
+                <canvas ref="c2" v-show="show2"></canvas>
+            </transition><transition name="slide-fade">
+                <canvas ref="c3" v-show="show3"></canvas>
+            </transition>            
         </div>
     </div>    
 </template>
@@ -183,5 +188,14 @@ export default {
 .daytimesc {
     width: 70%;
     height: 70%;
+}
+.slide-fade-enter-active {
+    transition: all .5s ease;
+}
+.slide-fade-leave-active {
+    transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(5px);opacity: 0;
 }
 </style>

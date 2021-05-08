@@ -51,7 +51,8 @@
                                 上传商品
                             </el-button>
                             <el-badge :value="messages" style="margin-left:5px">
-                                <el-button type="" plain size="mini" @click="openinbox">消息</el-button>
+                                <!-- <el-button type="" plain size="mini" @click="openinbox">消息</el-button> -->
+                                <el-button type="" plain size="mini" @click="gotomsg">消息</el-button>
                             </el-badge>
                             <el-dropdown class="headimg">
                                 <span>
@@ -107,6 +108,9 @@ export default {
             this.socket.onerror = this.error
             this.socket.onmessage = this.getMessage
         },
+        gotomsg:function() {
+            this.$router.push({path:'/personalcenter/inbox'})
+        },
         open:function() {
             console.log("websocket connected")
         },
@@ -120,12 +124,16 @@ export default {
             this.socket.send();
         },
         toupload:function() {
-            this.$router.push({path:'/upload'})
+            if(window.sessionStorage.getItem("token")) {
+            this.$router.push({path:'upload'})
+            } else {
+                this.togglelogin
+            }
         },
         unregister:function() {
             window.sessionStorage.removeItem('userinfo')
             window.sessionStorage.removeItem('token')
-            this.$router.push({path:'../login'})
+            this.$router.push({path:'/login'})
         },
         gotopc:function() {
             if (window.sessionStorage.getItem('token')) {
@@ -142,10 +150,10 @@ export default {
         },
         gotologin:function() {
             console.log(1)
-            this.$router.push({ path:"../login"})
+            this.$router.push({ path:"/login"})
         },
         gotosignup:function() {
-            this.$router.push({ path:"../register"})
+            this.$router.push({ path:"/register"})
         }
     },
     components: { 

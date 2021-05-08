@@ -35,7 +35,14 @@
                       <span class="address">联系方式：{{ details.phone}}</span>
                   </div>
             </el-main>
-            </el-container></el-dialog>
+            </el-container>
+            </el-dialog>
+          商品分类
+          <el-cascader
+              v-model="cg"
+              :options="cgs"
+              @change="hdcg">
+          </el-cascader>
           <el-table :data="goodslist" style="width: 100%" highlight-current-row >
                         <el-table-column prop="title" label="商品标题" width="300px"></el-table-column>
                         <!-- <el-table-column prop="modifyTime" label="修改时间" width="180"></el-table-column> -->
@@ -57,6 +64,11 @@
                             </template>
                         </el-table-column>
                         </el-table>
+                            <el-pagination
+                            :current-page.sync="pagenow"
+                            layout="total, prev, pager, next"
+                            :total="goodslist.length">
+                          </el-pagination>
       </div>
 
 </template>
@@ -67,6 +79,72 @@ export default {
   components: { },
   data:function() {
     return {
+        cg:[],
+        cgs:[{
+          value: 'meizhuang',
+          label: '美妆',
+          children:[
+          {
+            value:'kouhong',
+            label:'口红'
+          },{
+            value:'yanying',
+            label:'眼影'
+          },{
+            value:'hufu',
+            label:'护肤'
+          },,{
+            value:'fangshai',
+            label:'防晒？'
+          },
+          ]
+        },{
+          value: 'shuji',
+          label: '书籍',
+          children:[
+          {
+            value:'keben',
+            label:'课本'
+          },{
+            value:'xiaoshuo',
+            label:'小说'
+          }
+          ]
+        },{
+          value: 'diannao',
+          label: '电脑相关',
+          children:[
+          {
+            value:'jianpan',
+            label:'键盘'
+          },{
+            value:'zhuji',
+            label:'主机'
+          },{
+            value:'xianka',
+            label:'显卡'
+          },
+          ]
+        },{
+          value: 'riyong',
+          label: '娱乐',
+          children:[
+          {
+            value:'jubensha',
+            label:'剧本杀'
+          },{
+            value:'zhuji',
+            label:'主机'
+          },{
+            value:'zhangji',
+            label:'掌机'
+          },
+          ]
+        },{
+          value: 'qita',
+          label: '其他'
+        }],
+        pagenow:1,
         details:{
           title:"",
           price:"",
@@ -132,6 +210,11 @@ export default {
     this.bigurl = this.urllist[0]
   },
   methods: {
+      hdcg:function() {
+        let that = this
+        // console.log(that.cg)
+        this.$message.success("已获取")
+      },
       bigize:function(index) {
             this.bigurl=this.urllist[index]
         },

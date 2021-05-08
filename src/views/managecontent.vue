@@ -27,19 +27,19 @@
         <el-container>
              <el-aside width="200px">
              <el-menu  class="el-menu-vertical-demo" :collapse="isCollapse" router default-active="/goodscheck">
-                    <el-menu-item index="/goodscheck">
+                    <el-menu-item index="goodscheck">
                         <i class="zi zi_listul zi_size"></i>
                         <span slot="title"> 商品审核</span>
                     </el-menu-item>
-                    <el-menu-item index="/usermanage">
+                    <el-menu-item index="usermanage">
                         <i class="zi zi_usercog zi_size"></i>
                         <span slot="title">  用户管理</span>
                     </el-menu-item>
-                    <el-menu-item index="/statistic">
+                    <el-menu-item index="statistic">
                         <i class="zi zi_curve zi_size"></i>
                         <span slot="title">  数据统计</span>
                     </el-menu-item>
-                    <el-menu-item index="/msettings">
+                    <el-menu-item index="msettings">
                         <i class="zi zi_circleComponents zi_size"></i>
                         <span slot="title">  设置</span>
                     </el-menu-item>

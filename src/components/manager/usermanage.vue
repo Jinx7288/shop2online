@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-table :data="userlist" style="width: 100%" highlight-current-row >
+      <el-table :data="userlist.slice(0+(pagenow-1)*10,10+(pagenow-1)*10)" style="width: 100%" highlight-current-row >
                         <el-table-column prop="username" label="用户名" width="250"></el-table-column>
                         <el-table-column prop="state" label="状态" width="100px"></el-table-column>
                         <el-table-column prop="lasttime" label="最后登录时间" width="270"></el-table-column>
@@ -14,6 +14,11 @@
                             </template>
                         </el-table-column>
                         </el-table>
+                        <el-pagination
+                            :current-page.sync="pagenow"
+                            layout="total, prev, pager, next"
+                            :total="userlist.length">
+                          </el-pagination>
   </div>
 </template>
 
@@ -22,6 +27,7 @@ export default {
   name: 'test',
   data:function() {
     return {
+        pagenow:1,
         userlist:[
           {
             username:"test",

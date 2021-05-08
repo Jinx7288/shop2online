@@ -1,7 +1,11 @@
 <template>
     <div>
         <el-card>
-            <el-image :src="imgurl" class="image" fit="fill"></el-image>
+            <el-image :src="imgurl" class="image" fit="fill">
+                <div slot="error" class="image-err">
+                    <i class="el-icon-picture-outline">图片不存在哦(＠_＠;))</i>
+                </div>
+            </el-image>
             <div style="padding: 14px;">
                 <span class="title">{{ item.msg }}</span>
                 <span class="price">{{ item.price }}</span>
@@ -65,7 +69,13 @@ export default {
     }
 }
 </script>
+<style>
+#app > div > section > main > div > div:nth-child(4) > div > div > div > div.el-image.image > div {
+    padding: 40% 15%;
+}
+</style>
 <style scoped>
+
 .button {
     margin: 5px auto;
 }

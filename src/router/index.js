@@ -19,6 +19,7 @@ import msettings from "../components/manager/msettings"
 import usermanage from "../components/manager/usermanage"
 import personalgooddetail from "../components/personalcenter/personalgooddetail"
 import statistic from "../components/manager/statistic"
+import inbox from "../components/personalcenter/inbox"
 Vue.use(VueRouter)
 
 const routes = [
@@ -30,19 +31,19 @@ const routes = [
     component:managecontent,
     children:[
         {
-            path:"",redirect:"/goodscheck"
+            path:"",redirect:"goodscheck"
         },
         {
-            path:"/goodscheck",component:goodscheck
+            path:"goodscheck",component:goodscheck
         },
         {
-            path:"/usermanage",component:usermanage
+            path:"usermanage",component:usermanage
         },
         {
-            path:"/statistic",component:statistic
+            path:"statistic",component:statistic
         },
         {
-            path:"/msettings",
+            path:"msettings",
             component:msettings
         }
     ]},
@@ -51,18 +52,19 @@ const routes = [
     component:shop,
     children:[
         {
-            path:"",redirect:"/showpanel"
+            path:"",redirect:"showpanel"
         },
         {
-            path:"/showpanel",component:showpanel
+            path:"showpanel",component:showpanel
         },
         {
-            path:"/detail",
+            path:"detail",
             component:detail
+            
         },
         
         {
-            path:'/upload',component:upload
+            path:'upload',component:upload
         }
     ]
     },
@@ -70,19 +72,25 @@ const routes = [
     component: personalcenter,
     children:[
         {
-            path:"/infor",component:infor
+            path:"",redirect:"infor"
         },
         {
-            path:"/addresses",component:addresss
+            path:"infor",component:infor
         },
         {
-            path:"/orders",component:orders
+            path:"addresses",component:addresss
         },
         {
-            path:"/settings",component:settings
+            path:"orders",component:orders
         },
         {
-            path:"/personalgooddetail",component:personalgooddetail
+            path:"settings",component:settings
+        },
+        {
+            path:"personalgooddetail",component:personalgooddetail
+        },
+        {
+            path:"inbox",component:inbox
         }
     ]},
 ]

@@ -40,7 +40,13 @@ import {Button
         ,InputNumber
         ,Table
         ,TableColumn
+        ,Pagination
+        ,InfiniteScroll
+        ,Cascader
         ,Popover} from 'element-ui'
+Vue.use(infi)
+Vue.use(Cascader)
+Vue.use(Pagination)
 Vue.use(Popover)
 Vue.use(Table)
 Vue.use(TableColumn)

@@ -106,10 +106,11 @@ export default {
         },
         handlechange:function(file,upfilelist) {
             this.upfilelist.push(file)
-            console.log(this.upfilelist)
+            // console.log(this.upfilelist)
         },
         handleRemove(file, fileList) {
-            this.upist = fileList
+            let li = this.upfilelist
+            this.upfilelist=li.slice(li.indexOf(file),1)
         },
         uploadtoserver:function() {
             // this.$refs.upload.submit();
@@ -125,7 +126,7 @@ export default {
                 .then(function (res) {
                 // console.log(res);
                 if (res.status == 200) {
-                        that.$message.success(res.data.msg);
+                        that.$message.success("上传成功");
                         let fformdata= new FormData;
                         fformdata.append("goodsId","1");
                         fformdata.append("tag","1");
@@ -137,7 +138,7 @@ export default {
                             "token":token
                         }})
                         .then(function (res) {
-                        console.log(res);
+                        // console.log(res);
                         if (res.status == 200) {
                             that.$message.success(res.data.msg);
                         }

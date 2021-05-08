@@ -23,16 +23,16 @@ export default {
             this.$emit('ordertoggle')
         },
         report:function() {
+            let that = this
             this.reported=true;
              this.$http
             .post("/auth/user/report", {
-            email: that.resetpw.email,
-            username:that.resetpw.username
+                
             })
             .then(function (res) {
                 console.log(res);
                 if (res.status == 200) {
-                     this.$message.warning("已举报，待工作人员审核")
+                     that.$message.warning("已举报，待工作人员审核")
                 }
             });
         }

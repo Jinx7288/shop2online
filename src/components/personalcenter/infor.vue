@@ -1,7 +1,7 @@
 <template>
   <div class="back">
     <el-header>
-    <el-button type="danger">删除选中</el-button>
+    <el-button type="danger" disabled>删除选中</el-button>
     </el-header>
     <el-main>
         <goodcardper v-for="(item,index) in goods"

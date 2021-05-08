@@ -9,7 +9,7 @@
             :router="true"
             >
             <el-menu-item index="infor" class="zi zi_useredit">  我的商品</el-menu-item>
-            <el-menu-item index="inbox" disabled>消息中心</el-menu-item>
+            <el-menu-item index="inbox" class="zi zi_envelopeBold"> 消息中心</el-menu-item>
             <el-menu-item index="addresses" class="zi zi_addressBook"> 地址管理</el-menu-item>
             <el-menu-item index="orders" class="zi zi_list"> 订单管理</el-menu-item>
             <el-menu-item index="settings" class="zi zi_cog" disabled> 设 置</el-menu-item>
@@ -47,13 +47,13 @@ export default {
 <style scoped>
 .headpic {
     width: 100%;
-    height: 200px;
+    height: 130px;
 }
 .head {
-    width: 100%;
+    width: 1320px;
     margin: 0px 0px;
     padding: 0px 200px;
-    background-color: #fafafa;;
+    background-color: #fafafa;
 }
 .el-tab-pane {
    

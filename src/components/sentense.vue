@@ -44,7 +44,7 @@ export default {
     background-color: rgb(243, 241, 241);
     padding:15px 90px ;
     margin: 0px auto;
-    width: 70%;
+    width: 50%;
     border-radius: 10px;
     border:rgb(243, 241, 241) solid 0.2px;
     font-size: 18px;

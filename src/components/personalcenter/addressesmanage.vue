@@ -46,11 +46,20 @@ export default {
   data:function() {
     return {
       addresses:[
-        // {
-        //   address:"铜盘校区#10",
-        //   phone:"15377777777",
-        //   receiver:"哆啦A梦"
-        // }
+        {
+          address:"铜盘校区#10",
+          phone:"15377777777",
+          receiver:"哆啦A梦"
+        },
+        {
+          address:"厦门美院",
+          phone:"15377777777",
+          receiver:"小智"
+        },{
+          address:"旗山校区#27",
+          phone:"15377777777",
+          receiver:"皮卡丘"
+        }
         ],
       newad: {
         address:"",
@@ -76,10 +85,10 @@ export default {
                      ).then(function(res){
                         console.log(res);
                         if(res.data.code=="1") {
-                            console.log(res.data.data)
+                            // console.log(res.data.data)
                             that.addresses = res.data.data
                         } else {
-                            that.$message.error("获取地址失败");
+                            // that.$message.error("获取地址失败");
                         }
                      },(e)=>{
                          that.$message.error("请求失败");
@@ -99,7 +108,7 @@ export default {
         .then(function (res) {
           console.log(res);
           if (res.status == 200) {
-            that.$message.success(res.data.msg);
+            that.$message.success("添加成功");
           }
         });
         this.addresses.push(cache)
@@ -111,7 +120,7 @@ export default {
         .then(function (res) {
           console.log(res);
           if (res.status == 200) {
-            that.$message.success(res.data.msg);
+            that.$message.success("修改成功");
           }
         });
         this.addresses[this.modiindex] = cache
@@ -133,7 +142,7 @@ export default {
         .then(function (res) {
           console.log(res);
           if (res.status == 200) {
-            that.$message.success(res.data.msg);
+            that.$message.success("删除成功");
           }
         });
         adlist.splice(index,1)
