@@ -89,6 +89,7 @@ export default {
             that.$message.success("冻结成功！");
           }
         });
+            that.$message.success("冻结成功！");
       },
       unfreeze:function(index,list) {
           let that = this;
@@ -103,6 +104,8 @@ export default {
             that.$message.success("解冻成功！");
           }
         });
+            that.$message.success("解冻成功！");
+
       }
   },
   props:{

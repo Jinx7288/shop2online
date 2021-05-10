@@ -18,25 +18,47 @@
 
 <script>
 import goodcardper from "../personalcenter/goodcardper"
+import Mock from 'mockjs'
+
 export default {
   data:function() {
     return {
-      goods:[
-      {
-        goodsId:"232",
-        seller:"admin",
-        date:"20210520",
-        msg:"head for a good"
-      }
-      ]
+      // goods:[
+      // {
+      //   goodsId:"232",
+      //   seller:"admin",
+      //   date:"20210520",
+      //   msg:"head for a good"
+      // }
+      // ]
     }
   },
    computed:{
     userinfo:function() {
       let userinfo = window.sessionStorage.getItem("userinfo") ? window.sessionStorage.getItem("userinfo") : {username:"not"}
       return userinfo
+    },
+    goods() {
+      let Random = Mock.Random;
+      let list = []
+      for(let i = 0;i<=5;i++) {
+        let imgurl = "http://placekitten.com/g/500/500"
+           let goods = Mock.mock(
+        {
+          "goodsid":"@natural(3444,4444)",
+          "seller":"@cname",
+          "title":"@cparagraph(1)",
+          "msg":"@cparagraph(1)",
+          "state|1":[1,2,3,4,5],
+          "imgurl":imgurl,
+          "date":"@date('yyyy-MM-dd')"
+        })
+        list.push(goods)
+      }
+      return list
     }
   },
+
   mounted:function() {
      let that=this;
             this.$http.get('/users/getUserGoods', { headers: {

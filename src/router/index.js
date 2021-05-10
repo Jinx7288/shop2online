@@ -87,7 +87,7 @@ const routes = [
             path:"settings",component:settings
         },
         {
-            path:"personalgooddetail",component:personalgooddetail
+            path:"personalgooddetail",component:personalgooddetail  
         },
         {
             path:"inbox",component:inbox

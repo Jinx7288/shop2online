@@ -127,7 +127,7 @@ export default {
       logininfo: {
         code: "",
         username: "admin",
-        password: "666666",
+        password: "admin",
       },
       showsetpw: false,
       resetpw: {
@@ -169,7 +169,7 @@ export default {
           })
           .then(
             function (res) {
-              if (res.data.code == '1') {
+              if (res.status==200) {
                 that.$message.success("登录成功");
                 console.log(res)
                 window.sessionStorage.setItem(
@@ -181,7 +181,7 @@ export default {
                   JSON.stringify(that.logininfo)
                 );
                 that.$store.commit("getuserinfo", that.logininfo);
-                that.$router.replace({ path: "/shop" });
+                that.$router.replace({ path: "/managecontent" });
               } else {
                 that.$message.error(res.data.msg);
               }

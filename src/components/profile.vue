@@ -27,7 +27,7 @@ export default {
 .back {
     /* background-image: url("https://www.fzu.edu.cn/attach/2015/03/07/86283.jpg"); */
     /* background-image: url("http://ww1.sinaimg.cn/mw690/70ace9b7ly1ggzusnypoej20yi0yiaop.jpg"); */
-    background: url("https://www.fzu.edu.cn/attach/2015/05/10/119502.jpg") 0px -40px ;
+    background: url("https://www.fzu.edu.cn/attach/2015/05/10/119502.jpg") 0px -40px fixed;
 
 }
 

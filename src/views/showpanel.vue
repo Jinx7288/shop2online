@@ -47,7 +47,7 @@
         </el-row>
         <headbar @rendergoods = "rendergoods" class="headbar"></headbar>
 
-        <div style="margin:0px 80px">
+        <div style="margin:0px auto">
              <goodcard v-for="(item,index) in goodList"
                     :key="item.goodid"
                     :item='item'
@@ -63,6 +63,7 @@
 import goodcard from '../components/goodcard.vue'
 import headbar from '../components/headbar'
 import biglabel from "../components/biglabel"
+import Mock from "mockjs"
 // import test from '../components/test'
 export default {
     data:function() {
@@ -109,20 +110,51 @@ export default {
         },
         getGoodsList:function() {
             let that=this;
-            this.$http.get('index/getGoods?mode=0&page=1&size=20'
-                     ).then(function(res){
-                        console.log(res);
-                        if(res.data.code=="1") {
-                            console.log(res.data.data)
-                            // this.goodList=JSON.parse(res.data.data)
-                            that.goodList=res.data.data
-                        } else {
-                            that.$message.error("获取数据失败");
+            // this.$http.get('index/getGoods?mode=0&page=1&size=20'
+            //          ).then(function(res){
+            //             console.log(res);
+            //             if(res.data.code=="1") {
+            //                 console.log(res.data.data)
+            //                 // this.goodList=JSON.parse(res.data.data)
+            //                 that.goodList=res.data.data
+            //             } else {
+            //                 that.$message.error("获取数据失败");
+            //             }
+            //          },(e)=>{
+            //              that.$message.error("请求失败");
+            //          });
+
+                        let Random = Mock.Random;
+                        Random.extend({
+                            tag: function(date) {
+                                var tags = ['女装','女裙','女上装','手机','手机数码','摄像机','充电宝','排插','墙纸','键盘','主机','显卡','娱乐','剧本杀','主机','掌机','其他'];
+                                return this.pick(tags)
+                            }
+                        })
+                        let clist = []
+                        for(let i = 0;i<=40;i++) {
+                            let imgurl = "http://placekitten.com/g/300/300";
+                            let tags =[]
+                            for(let i = 1;i<=3;i++) {
+                            tags.push(Random.tag())
+                            }
+                            let goods = Mock.mock(
+                            {
+                            "goodsid":"@natural(3444,4444)",
+                            "title":"@cword(5,13)",
+                            "msg":"@cparagraph(4,5)",
+                            "state|1":[1,2,3,4,5],
+                            "imgurl":imgurl,
+                            "price":"@natural(10,500)",
+                            "phone":"@natural(13000000000,19900000000)",
+                            "seller":"@cname",
+                            "date":"@date",
+                            "tags":tags
+                            })
+                            clist.push(goods)
                         }
-                     },(e)=>{
-                         that.$message.error("请求失败");
-                     });
-            this.$store.commit('shareGoods',that.goodList);
+        this.goodList = clist
+        this.$store.commit('shareGoods',that.goodList);
         },
         togglelogin:function() {
         this.showlogin= this.showlogin == true ? false : true
@@ -162,8 +194,12 @@ export default {
     margin-top: 40px;
 }
 .goodcard {
+    /* display: inline-block;
+    margin: 11px auto; */
     display: inline-block;
-    margin: 11px 20px;
+    margin: 30px;
+    height: 250px;
+    width: 250px;
 }
 .box-card {
     padding-left: 35px;

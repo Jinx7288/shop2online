@@ -44,7 +44,7 @@ import {Button
         ,InfiniteScroll
         ,Cascader
         ,Popover} from 'element-ui'
-Vue.use(infi)
+Vue.use(InfiniteScroll)
 Vue.use(Cascader)
 Vue.use(Pagination)
 Vue.use(Popover)

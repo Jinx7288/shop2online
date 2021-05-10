@@ -1,18 +1,19 @@
 <template>
     <div>
         <el-card>
-            <el-image :src="imgurl" class="image" fit="fill">
+            <el-image :src="item.imgurl" class="image" fit="fill">
                 <div slot="error" class="image-err">
                     <i class="el-icon-picture-outline">图片不存在哦(＠_＠;))</i>
                 </div>
             </el-image>
             <div style="padding: 14px;">
-                <span class="title">{{ item.msg }}</span>
-                <span class="price">{{ item.price }}</span>
+                <span class="title">{{ item.title }}</span>
+                <span class="price">￥{{ item.price }}</span>
                 <div class="bottom clearfix">
                 <span class="el-icon-user user">{{ item.seller }}</span><br>
                 <time class="time el-icon-time">{{ item.date | fixdate }}</time><br>
                 <el-button type="danger" class="button" size="small" @click="gotodetail">详情</el-button>
+                
                 </div>
             </div>
     </el-card>  
@@ -38,7 +39,7 @@ export default {
     methods:{
         gotodetail:function() {
             if (window.sessionStorage.getItem('userinfo')) {
-                this.$router.push({path:'/detail',query: { goodid:this.goodid}})
+                this.$router.push({path:'detail',query: { goodid:this.goodid}})
             } else {
                 this.$emit('togglelogin')
             }
@@ -64,7 +65,7 @@ export default {
             value = value.toString()
             value = value.slice(0,16)
             value = value.replace("T",)
-            return 
+            return value
         }
     }
 }

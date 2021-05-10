@@ -43,7 +43,7 @@
               :options="cgs"
               @change="hdcg">
           </el-cascader>
-          <el-table :data="goodslist" style="width: 100%" highlight-current-row >
+          <el-table :data="goodslist.slice(0+(pagenow-1)*10,10+(pagenow-1)*10)" style="width: 100%" highlight-current-row >
                         <el-table-column prop="title" label="商品标题" width="300px"></el-table-column>
                         <!-- <el-table-column prop="modifyTime" label="修改时间" width="180"></el-table-column> -->
                         <el-table-column prop="upuser" label="上传用户" width="200px"></el-table-column>
@@ -75,11 +75,12 @@
 
 <script>
 // import { config } from 'vue/types/umd'
+import Mock from "mockjs"
 export default {
   components: { },
   data:function() {
     return {
-        cg:[],
+        cg:["meizhuang","kouhong"],
         cgs:[{
           value: 'meizhuang',
           label: '美妆',
@@ -167,35 +168,41 @@ export default {
             passstate:0,
             delstate:0
         },
-        showdetail:false,
-        goodslist:[
-          {
-            title:"多余的网球拍",
-            gid:"34",
-            upuser:"test",
-            tags:["体育","户外","运动"],
-            passstate:0,
-            delstate:0
-          },
-          {
-            title:"闲置的键盘",
-            gid:"57",
-            upuser:"test",
-            tags:["编程","电脑","coding"],
-            passstate:1,
-            delstate:0
-          },{
-            title:"无用的作业",
-            gid:"45",
-            upuser:"test",
-            tags:["废品","白送"],
-            passstate:0,
-            delstate:0
-          }
-        ]
+        showdetail:false
     }
   },
   computed:{
+    goodslist() {
+      let Random = Mock.Random;
+      Random.extend({
+        tag: function(date) {
+            var tags = ['美妆','口红','眼影','护肤','防晒','书籍','小说','课本','电脑相关','键盘','主机','显卡','娱乐','剧本杀','主机','掌机','其他'];
+            return this.pick(tags)
+        }
+      })
+      let list = []
+      for(let i = 0;i<=40;i++) {
+        let imgurl = "http://placekitten.com/g/200/200";
+        let tags =[]
+        for(let i = 1;i<=3;i++) {
+          tags.push(Random.tag())
+        }
+        let goods = Mock.mock(
+        {
+          "goodsid":"@natural(3444,4444)",
+          "title":"@cword(5,15)",
+          "msg":"@cparagraph(4,5)",
+          "state|1":[1,2,3,4,5],
+          "imgurl":imgurl,
+          "price":"@natural(10,500)",
+          "phone":"@natural(13000000000,19900000000)",
+          "upuser":"@cname",
+          "tags":tags
+        })
+        list.push(goods)
+      }
+      return list
+    }
   },
   filters: {
         splitsth: function (value) {
@@ -214,6 +221,7 @@ export default {
         let that = this
         // console.log(that.cg)
         this.$message.success("已获取")
+        
       },
       bigize:function(index) {
             this.bigurl=this.urllist[index]
@@ -224,9 +232,9 @@ export default {
       let gid = this.goodslist[index].gid
       this.details = {
         title:this.goodslist[index].title,
-        price:"233",
-        phone:"19977777777",
-        msg:"just sth for test"
+        price:this.goodslist[index].price,
+        phone:this.goodslist[index].phone,
+        msg:this.goodslist[index].msg
       }
     },
     checkpass:function(index) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="back">
+  <div class="back"  v-infinite-scroll="load" >
         <sentense 
             v-for="(item,index) in msgs"
                     :key="item"
@@ -36,5 +36,7 @@ export default {
 <style scoped>
 .back {
     width: 60vw;
+    background-color: rgb(244, 244, 244);
+    height: 65vh;
 }
 </style>>

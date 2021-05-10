@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-card>
-            <el-image :src="base+toString(item.goodsId)" class="image" fit="fill"></el-image>
+            <el-image :src="item.imgurl" class="image" fit="fill"></el-image>
             <div style="padding: 14px;">
                 <span class="title">{{ item.msg }}</span>
                 <span class="price">{{ item.price }}</span>
@@ -32,7 +32,7 @@ export default {
     methods:{
         gotodetail:function() {
             if (window.sessionStorage.getItem('userinfo')) {
-                this.$router.push({path:'/personalgooddetail',query: { goodid:this.goodid}})
+                this.$router.push({path:'personalgooddetail',query: { goodid:this.goodid}})
             } else {
                 this.$emit('togglelogin')
             }

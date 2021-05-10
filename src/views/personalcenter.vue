@@ -15,7 +15,7 @@
             <el-menu-item index="settings" class="zi zi_cog" disabled> 设 置</el-menu-item>
             </el-menu>
         </div>
-        <div>
+        <div class="body">
             <router-view></router-view>
         </div>
     </div>    
@@ -46,13 +46,13 @@ export default {
 </script>
 <style scoped>
 .headpic {
-    width: 100%;
+    width: auto;
     height: 130px;
 }
 .head {
     width: 1320px;
-    margin: 0px 0px;
-    padding: 0px 200px;
+    margin: 0px 200px;
+    padding: 0px 0px;
     background-color: #fafafa;
 }
 .el-tab-pane {
