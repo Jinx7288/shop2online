@@ -2,13 +2,15 @@
   <div class="box">
       <el-row>
           <el-col :span="4" :offset="0">
-              <el-avatar shape="square" :size="100" :src="item.imgurl"></el-avatar>
+              <el-avatar shape="square" :size="100" :src="item.imgurl" class="img"></el-avatar>
           </el-col>
-          <el-row :span="20">
+          <el-col :span="16">
               <p class="title">{{ item.title }}</p>
               <p class="msg">{{ item.msg}}</p>
               <p class="state">{{ item.state | replace }}</p>
-          </el-row>
+            <el-button type="danger" v-if="item.state==2">取消订单</el-button>
+              <el-button type="info" v-if="item.state==3">申请重新审核</el-button>
+          </el-col>
       </el-row>
   </div>
 </template>
@@ -47,6 +49,17 @@ export default {
 }
 </script>
 <style scoped>
+.img {
+    position: relative;
+    top: 50%;
+    transform:translateY(50%)
+}
+.bt {
+    margin: 40px 0px;
+    position: relative;
+    top: 50%;
+    transform:translateY(50%)
+}
 .box {
     padding: 20px;
     background-color: rgb(230, 230, 230);
@@ -56,5 +69,13 @@ export default {
 .title {
     color: rgb(255, 136, 136);
     font-size: 1.5em;
+}
+.state {
+    padding: 3px;
+    color: red;
+    background-color: rgb(255, 212, 212);
+    border: red 0.3px solid;
+    border-radius: 2px;
+    width: 4em;
 }
 </style>>

@@ -1,11 +1,12 @@
 <template>
     <div class="card">
-        <span class="title"></span><br>
-        <span class="price">价格:￥ </span><br>
-        <div class="detaileddetail">描述：</div><br>
-        <span class="address">联系方式：</span>
+        <span class="title">{{ detail.title }}</span><br>
+        <span class="price">价格:￥ {{detail.price}}</span><br>
+        <div class="detaileddetail">描述：{{ detail.msg}}</div><br>
+        <span class="address">联系方式：{{ detail.phone }}</span>
         <div class="btdiv" v-show="!justshow">
-                <el-button type="danger" class="wideer" @click="buyit">购买</el-button>
+                <el-button type="danger" class="wideer" @click="buyit"  v-show="!reported">购买</el-button>
+                <el-button type="danger" class="wideer" @click="buyit" disabled v-show="reported">购买</el-button>
                 <el-button type="danger" plain class="wideer" @click="report"  v-show="!reported">举报</el-button>
                 <el-button type="danger" plain class="wideer" v-show="reported" disabled>已举报</el-button>
         </div>
@@ -35,6 +36,8 @@ export default {
                      that.$message.warning("已举报，待工作人员审核")
                 }
             });
+
+            that.$message.warning("已举报，待工作人员审核")
         }
     },
     props:{

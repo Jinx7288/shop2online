@@ -45,15 +45,16 @@
         </div>
             </el-col>
         </el-row>
-        <headbar @rendergoods = "rendergoods" class="headbar"></headbar>
+        <headbar @rendergoods = "rendergoods" class="headbar" @valueup="valueup" @valuedown="valuedown"></headbar>
 
-        <div style="margin:0px auto">
+        <div style="margin:0px auto" v-infinite-scroll="load">
              <goodcard v-for="(item,index) in goodList"
                     :key="item.goodid"
                     :item='item'
                     :index='index'
                     class="goodcard"
                     @togglelogin="togglelogin"></goodcard>
+                     <p v-if="true" style="margin:0px 45%">加载中...</p>
         </div>
        
     </div>
@@ -68,6 +69,7 @@ import Mock from "mockjs"
 export default {
     data:function() {
         return {
+             timer:"",
             goodList:[
             ],
             showlogin:false,
@@ -88,8 +90,36 @@ export default {
     created:function() {
         this.getGoodsList();
         this.getlabels();
+        let that = this
+        this.timer =setInterval(this.qesmsg, 3000);
     },
     methods:{
+        load() {
+            
+        },
+          qesmsg:function() {
+            let that = this;
+            //   this.$http
+            //     .post("/auth/getmsg", {
+            //         userid:userinfo
+            //     })
+            //     .then(function (res) {
+            //     console.log(res);
+            //     if (res.status == 200) {
+            //         that.$message.success(res.data.msg);
+            //     }
+            //     });
+            // console.log("sth")
+            that.$message.info("您有新消息！")
+        },
+        valueup:function() {
+            let that = this
+            this.goodList = that.goodList.sort((a,b)=> a.price-b.price)
+        },
+        valuedown:function() {
+            let that = this
+            this.goodList=that.goodList.sort((a,b)=> b.price-a.price)
+        },
         rendergoods:function(item) {
             this.goodList = item
         },

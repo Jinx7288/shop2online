@@ -50,7 +50,7 @@
                             <el-button type="danger" @click="toupload" size="small">
                                 上传商品
                             </el-button>
-                            <el-badge :value="messages" style="margin-left:5px">
+                            <el-badge :value="messages" style="margin-left:5px" is-dot="true">
                                 <!-- <el-button type="" plain size="mini" @click="openinbox">消息</el-button> -->
                                 <el-button type="" plain size="mini" @click="gotomsg">消息</el-button>
                             </el-badge>
@@ -91,7 +91,8 @@ export default {
     created() {
     },
     mounted:function() {
-        this.connect()
+        this.connect();
+
     },
     computed:{
         userinfo:function() {
@@ -159,7 +160,9 @@ export default {
     components: { 
         sentense
      },
-
+     beforeDestroy() {
+      clearInterval(this.timer);
+    }
 }
 </script>
 <style>

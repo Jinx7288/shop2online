@@ -23,38 +23,40 @@ export default {
     methods:{
         valueup:function() {
              let that = this;
-            this.$http.get('index/getGoods?mode=1&page=1&size=20'
-                     ).then(function(res){
-                         console.log(res);
-                        if(res.status = "200") {
-                            that.$emit('rendergoods',res.data.data)
-                        } else {
-                            that.$message.error("获取失败");
-                        }
-                     },(e)=>{
-                         that.$message.error("请求失败");
-                     }); 
+            // this.$http.get('index/getGoods?mode=1&page=1&size=20'
+            //          ).then(function(res){
+            //              console.log(res);
+            //             if(res.status = "200") {
+            //                 that.$emit('rendergoods',res.data.data)
+            //             } else {
+            //                 that.$message.error("获取失败");
+            //             }
+            //          },(e)=>{
+            //              that.$message.error("请求失败");
+            //          }); 
+            that.$emit('valueup');
         },
         valuedown:function() {
              let that = this;
-            this.$http.get('index/getGoods?mode=0&page=1&size=20'
-                     ).then(function(res){
-                         console.log(res);
-                        if(res.status = "200") {
-                            that.$emit('rendergoods',res.data.data)
-                        } else {
-                            that.$message.error("获取失败");
-                        }
-                     },(e)=>{
-                         that.$message.error("请求失败");
-                     }); 
+            // this.$http.get('index/getGoods?mode=0&page=1&size=20'
+            //          ).then(function(res){
+            //              console.log(res);
+            //             if(res.status = "200") {
+            //                 that.$emit('rendergoods',res.data.data)
+            //             } else {
+            //                 that.$message.error("获取失败");
+            //             }
+            //          },(e)=>{
+            //              that.$message.error("请求失败");
+            //          }); 
+            that.$emit('valuedown');
         },
         submitKw:function() {
             let kw=this.keyword;
             let that = this;
             this.$http.get('/index/getGoodsByKeyword?mode=0&page=1&size=20&keyword='+kw
                      ).then(function(res){
-                         console.log(res);
+                        //  console.log(res);
                         if(res.status = "200") {
                             that.$emit('rendergoods',res.data.data)
                         } else {

@@ -25,7 +25,7 @@
             <el-main>
                 <el-form :model="upForm" :rules="rules" ref="upForm" label-width="100px" class="form">
                     <el-form-item label="商品标题" prop="title">
-                        <el-input v-model="upForm.title" style="width: 60%"></el-input>
+                        <el-input v-model="upForm.title" style="width: 60%" maxlength="25"></el-input>
                     </el-form-item>
                     <el-form-item label="期望价格">
                            <el-input-number v-model="upForm.price" :precision="2" :step="0.1" :max="10000" :min="0" :controls="notctrl"></el-input-number>

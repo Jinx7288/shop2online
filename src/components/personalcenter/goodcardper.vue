@@ -9,7 +9,7 @@
                 <span class="el-icon-user user">{{ item.seller }}</span><br>
                 <time class="time el-icon-time">{{ item.date  }}</time><br>
                 <el-button type="danger" class="button" size="small" @click="gotodetail">详情</el-button>
-                <el-button type="danger" class="button" size="small">删除</el-button>
+                <el-button type="danger" class="button" size="small" @click="delgood">删除</el-button>
                 </div>
             </div>
     </el-card>  
@@ -21,7 +21,6 @@ export default {
     data:function() {
         return {
             base:"http://120.78.128.98:8080/index/getGoodsMainPicture?goodsId="
-            
         }
     },
     created:function() {
@@ -40,6 +39,9 @@ export default {
         },
         getSample:function() {
             let that = this
+            
+        },
+        delgood:function() {
             
         }
     },

@@ -7,13 +7,13 @@
                 </div>
             </el-image>
             <div style="padding: 14px;">
-                <span class="title">{{ item.title }}</span>
+                <span class="title">{{ item.title }}</span><br>
                 <span class="price">￥{{ item.price }}</span>
                 <div class="bottom clearfix">
                 <span class="el-icon-user user">{{ item.seller }}</span><br>
                 <time class="time el-icon-time">{{ item.date | fixdate }}</time><br>
                 <el-button type="danger" class="button" size="small" @click="gotodetail">详情</el-button>
-                
+
                 </div>
             </div>
     </el-card>  
@@ -93,7 +93,7 @@ export default {
 }
 .price {
     font-weight: 600;
-    margin-left: 20px;
+    margin: 20px 0px;
 }
 .user {
     font-size: 10px;

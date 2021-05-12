@@ -2,6 +2,7 @@ import Vue from 'vue'
 import {Button
         ,ButtonGroup
         ,Row
+        ,Checkbox
         ,Col
         ,Input
         ,Form
@@ -44,6 +45,7 @@ import {Button
         ,InfiniteScroll
         ,Cascader
         ,Popover} from 'element-ui'
+Vue.use(Checkbox)
 Vue.use(InfiniteScroll)
 Vue.use(Cascader)
 Vue.use(Pagination)
