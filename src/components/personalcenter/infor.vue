@@ -41,7 +41,7 @@ export default {
     goods() {
       let Random = Mock.Random;
       let list = []
-      for(let i = 0;i<=5;i++) {
+      for(let i = 0;i<=10;i++) {
         let imgurl = "http://placekitten.com/g/500/500"
            let goods = Mock.mock(
         {

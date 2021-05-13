@@ -1,9 +1,11 @@
 <template>
   <div class="box">
         <el-form :model="backForm" :rules="rules" ref="backForm" label-width="100px" class="form" v-show="sbed">
+                    
                     <el-form-item label="标题" prop="title">
                         <el-input v-model="backForm.title" style="width: 60%" maxlength="25"></el-input>
                     </el-form-item>
+
                     <el-form-item label="详细描述">
                         <el-input v-model="backForm.msg" 
                         type="textarea" 
