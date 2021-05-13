@@ -18,13 +18,13 @@
                 width="30%">
                 <el-row>
                     <el-col :span="12">
-                        <el-card class="box-card" shadow="hover" @click="gotologin">
+                        <el-card class="box-card" shadow="hover" @click.native="gotologin">
                             <div class="zi zi_usercheck icon_size3 zi_inverse"></div>
                             <div>我有账户，登录</div>
                         </el-card>
                     </el-col>
                     <el-col :span="12">
-                        <el-card class="box-card" shadow="hover" @click="gotosignup">
+                        <el-card class="box-card" shadow="hover" @click.native="gotosignup">
                             <div class="zi zi_userplus icon_size3 zi_inverse">
                             </div>
                             <div>没有,现在注册</div>
@@ -47,10 +47,10 @@
                             <span>闲置物品交易平台</span>
                         </el-col>
                         <el-col :span="4" :offset="18" class="habt">
-                            <el-button type="danger" @click="toupload" size="small">
+                            <el-button type="danger" @click="toupload" size="small" v-show="logined">
                                 上传商品
                             </el-button>
-                            <el-badge :value="messages" style="margin-left:5px" is-dot="true">
+                            <el-badge :value="messages" style="margin-left:5px" :is-dot="newmsg"  v-show="logined">
                                 <!-- <el-button type="" plain size="mini" @click="openinbox">消息</el-button> -->
                                 <el-button type="" plain size="mini" @click="gotomsg">消息</el-button>
                             </el-badge>
@@ -60,7 +60,7 @@
                                 </span>
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item @click.native="gotopc">{{ userinfo.username }}</el-dropdown-item>
-                                    <el-dropdown-item divided @click.native="unregister">注销</el-dropdown-item>
+                                    <el-dropdown-item divided @click.native="unregister" v-show="logined">注销</el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>        
                         </el-col>
@@ -85,7 +85,8 @@ export default {
                     ,"您的违规商品过多，若再次发布将被封禁账号，特此警告"
                     ],
             showbox:false,
-            showlogin:false
+            showlogin:false,
+            newmsg:true
         }
     },
     created() {
@@ -98,28 +99,37 @@ export default {
         userinfo:function() {
             return window.sessionStorage.getItem('userinfo') ? JSON.parse(window.sessionStorage.getItem('userinfo')) : {username:"未登录"}
         },
+        logined:function() {
+            return window.sessionStorage.getItem('userinfo') ? true :false
+        },
         path:function() {
-            return "ws:"+""
+            let token = JSON.parse(window.sessionStorage.getItem('token'))
+            return "ws://120.78.128.98:8080/socket/"+token
+            // return "ws://z3773e6368.qicp.vip/socket/"+token
         },
     },
     methods:{
         connect:function() {
-            this.socket = new WebSocket(this.path);
-            this.socket.onopen = this.open
-            this.socket.onerror = this.error
-            this.socket.onmessage = this.getMessage
+            let that = this
+            this.socket = new WebSocket(that.path);
+            this.socket.onopen = this.open;
+            this.socket.onerror = this.error;
+            this.socket.onmessage = this.getMessage;
         },
         gotomsg:function() {
             this.$router.push({path:'/personalcenter/inbox'})
         },
         open:function() {
-            console.log("websocket connected")
+            console.log("websocket连接已建立")
+            // console.log();
         },
         error:function() {
+            // console.log(e)
             console.log("failed to connect ")
         },
-        getMessage:function(msg) {
-            this.inbox.append(msg)
+        getMessage:function(ev) {
+            console.log(ev)
+            // this.inbox.append(msg)
         },
         send:function() {
             this.socket.send();

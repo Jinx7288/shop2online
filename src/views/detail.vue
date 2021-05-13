@@ -56,7 +56,7 @@
                         <el-input v-model="orderform.phone" style="width: 60%"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-checkbox v-model="checked" disabled="oldad">保存该地址</el-checkbox>
+                        <el-checkbox v-model="checked" :disabled="oldad">保存该地址</el-checkbox>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="danger" @click="orderclick">确 定</el-button>
@@ -194,6 +194,7 @@ export default {
                     that.$message.success("已通知卖家，请保持联系方式畅通")
                 }
             })
+            this.ordertoggle()
         },
         toshop:function() {
             this.$router.push({path:'/shop'})

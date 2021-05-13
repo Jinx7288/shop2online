@@ -58,7 +58,12 @@ export default {
                      ).then(function(res){
                         //  console.log(res);
                         if(res.status = "200") {
-                            that.$emit('rendergoods',res.data.data)
+                            let kws = res.data.data
+                            for(let item of kws) {
+                                item.title = item.msg
+                            }
+                            that.$emit('rendergoods',kws)
+                            console.log(res.data.data);
                         } else {
                             that.$message.error("搜索失败");
                         }

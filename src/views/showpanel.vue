@@ -8,13 +8,13 @@
                 width="30%">
                 <el-row>
                     <el-col :span="12">
-                        <el-card class="box-card" shadow="hover" @click="gotologin">
+                        <el-card class="box-card" shadow="hover" @click.native="gotologin">
                             <div class="zi zi_usercheck icon_size3 zi_inverse"></div>
                             <div>我有账户，登录</div>
                         </el-card>
                     </el-col>
                     <el-col :span="12">
-                        <el-card class="box-card" shadow="hover" @click="gotosignup">
+                        <el-card class="box-card" shadow="hover" @click.native="gotosignup">
                             <div class="zi zi_userplus icon_size3 zi_inverse">
                             </div>
                             <div>没有,现在注册</div>
@@ -91,7 +91,7 @@ export default {
         this.getGoodsList();
         this.getlabels();
         let that = this
-        this.timer =setInterval(this.qesmsg, 3000);
+        // this.timer =setInterval(this.qesmsg, 8000);
     },
     methods:{
         load() {

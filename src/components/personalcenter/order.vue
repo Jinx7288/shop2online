@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box" v-show="iscancel">
       <el-row>
           <el-col :span="4" :offset="0">
               <el-avatar shape="square" :size="100" :src="item.imgurl" class="img"></el-avatar>
@@ -8,8 +8,8 @@
               <p class="title">{{ item.title }}</p>
               <p class="msg">{{ item.msg}}</p>
               <p class="state">{{ item.state | replace }}</p>
-            <el-button type="danger" v-if="item.state==2">取消订单</el-button>
-              <el-button type="info" v-if="item.state==3">申请重新审核</el-button>
+            <el-button type="danger" v-if="item.state==2" @click="cancelorder">取消订单</el-button>
+              <el-button type="info" v-if="item.state==3" @click="recheck" :disabled="sbed">申请重新审核</el-button>
           </el-col>
       </el-row>
   </div>
@@ -19,7 +19,8 @@
 export default {
   data:function() {
     return {
-
+        iscancel:true,
+        sbed:false
     }
   },
   props:{
@@ -46,6 +47,16 @@ export default {
         return value
     }
     }, 
+methods:{
+    cancelorder:function() {
+        this.$message.success("已取消")
+        this.iscancel = false
+    },
+    recheck:function() {
+        this.sbed = true
+        this.$message.success("申诉已提交")
+    }
+}
 }
 </script>
 <style scoped>

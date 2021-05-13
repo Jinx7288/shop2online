@@ -13,6 +13,7 @@
             <el-menu-item index="addresses" class="zi zi_addressBook"> 地址管理</el-menu-item>
             <el-menu-item index="orders" class="zi zi_list"> 订单管理</el-menu-item>
             <el-menu-item index="settings" class="zi zi_cog" disabled> 设 置</el-menu-item>
+            <el-menu-item index="backmsg"> 反 馈 </el-menu-item>
             </el-menu>
         </div>
         <div class="body">

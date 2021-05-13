@@ -39,6 +39,10 @@
                         <i class="zi zi_curve zi_size"></i>
                         <span slot="title">  数据统计</span>
                     </el-menu-item>
+                    <el-menu-item index="issues">
+                        <i class="zi zi_flag zi_size"></i>
+                        <span slot="title"> 反馈处理</span>
+                    </el-menu-item>
                     <el-menu-item index="msettings">
                         <i class="zi zi_circleComponents zi_size"></i>
                         <span slot="title">  设置</span>

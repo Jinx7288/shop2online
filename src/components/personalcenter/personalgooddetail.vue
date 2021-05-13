@@ -27,40 +27,23 @@
         </el-aside>
         <el-main>
             <detailpanel2 :detail='gooddetail' @ordertoggle='ordertoggle' :justshow="justshow"></detailpanel2> 
-            <el-dialog title="下单"   :visible.sync="ordertogglestate">
-                 <el-form :model="orderform"  ref="orderform" label-width="100px">
-                    <el-form-item label="姓名" prop="title">
-                        <el-input v-model="orderform.title" style="width: 60%"></el-input>
-                    </el-form-item>
-                    <el-form-item label="联系方式" prop="phone" style="width:70%">
-                            <el-select v-model="value" placeholder="请选择">
-                                <el-option
-                                v-for="item in ads"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                                <span style="float: left">{{ item.label }}</span>
-                                <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
-                                </el-option>
-                            </el-select>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="danger" @click="orderclick">确 定</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-dialog>
         </el-main>
     </el-container>
 </template>
 <script>
 import detailpanel2 from '../detailpanel2'
+import Mock from "mockjs"
+
 export default {
     data:function() {
         return {
             fit:"fill",
-            gooddetail:{},
             urllist:[
-                
+                "http://placekitten.com/g/200/200",
+                "http://placekitten.com/g/205/220",
+                "http://placekitten.com/g/260/230",
+                "http://placekitten.com/g/270/240",
+                "http://placekitten.com/g/260/230",
             ],
             bigurl:'',
             ordertogglestate:false,
@@ -68,7 +51,8 @@ export default {
                 buyer:"",
             },
             ads:[],
-            justshow:false
+            justshow:false,
+            gooddetail:{}
         }
     },
     // computed:{
@@ -101,6 +85,32 @@ export default {
                          that.$message.error("商品请求失败");
                      });
         this.bigurl=this.urllist[0];
+              // this.bigurl=this.urllist[0];
+            let Random = Mock.Random;
+            Random.extend({
+                tag: function(date) {
+                    var tags = ['女装','女裙','女上装','手机','手机数码','摄像机','充电宝','排插','墙纸','键盘','主机','显卡','娱乐','剧本杀','主机','掌机','其他'];
+                    return this.pick(tags)
+                }
+            })
+                let imgurl = "http://placekitten.com/g/300/300";
+                let tags =[]
+                for(let i = 1;i<=3;i++) {
+                tags.push(Random.tag())
+                }
+                let goods = Mock.mock({
+                "goodsid":"@natural(3444,4444)",
+                "title":"@cword(5,13)",
+                "msg":"@cparagraph(4,5)",
+                "state|1":[1,2,3,4,5],
+                "imgurl":imgurl,
+                "price":"@natural(10,500)",
+                "phone":"@natural(13000000000,19900000000)",
+                "seller":"@cname",
+                "date":"@date",
+                "tags":tags
+                })
+        this.gooddetail= goods
     },
     methods:{
         bigize:function(index) {
@@ -116,6 +126,9 @@ export default {
     },
     components:{
         detailpanel2
+    },
+    computed:{
+
     }
 }
 </script>

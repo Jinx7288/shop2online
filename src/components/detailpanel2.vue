@@ -1,9 +1,9 @@
 <template>
     <div class="card">
-        <span class="title"></span><br>
-        <span class="price">价格:￥ </span><br>
-        <div class="detaileddetail">描述：</div><br>
-        <span class="address">联系方式：</span>
+           <span class="title">{{ detail.title }}</span><br>
+        <span class="price">价格:￥ {{detail.price}}</span><br>
+        <div class="detaileddetail">描述：{{ detail.msg}}</div><br>
+        <span class="address">联系方式：{{ detail.phone }}</span>
         <div class="btdiv" v-show="!justshow">
         </div>
     </div>

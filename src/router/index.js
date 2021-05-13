@@ -19,7 +19,9 @@ import msettings from "../components/manager/msettings"
 import usermanage from "../components/manager/usermanage"
 import personalgooddetail from "../components/personalcenter/personalgooddetail"
 import statistic from "../components/manager/statistic"
+import backmsg from "../components/personalcenter/backmsg"
 import inbox from "../components/personalcenter/inbox"
+import issues from "../components/manager/issues"
 Vue.use(VueRouter)
 
 const routes = [
@@ -45,6 +47,10 @@ const routes = [
         {
             path:"msettings",
             component:msettings
+        },
+        {
+            path:"issues",
+            component:issues
         }
     ]},
     { path:'/test',component:test},
@@ -91,6 +97,9 @@ const routes = [
         },
         {
             path:"inbox",component:inbox
+        },
+        {
+            path:"backmsg",component:backmsg
         }
     ]},
 ]
